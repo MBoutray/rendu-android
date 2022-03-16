@@ -3,8 +3,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="username_hint">Username</string>
+    <string name="email_hint">Email</string>
     <string name="login">Login</string>
     <string name="password_hint">Password</string>
     <string name="login_message">Welcome %s, you are logged in!</string>
-    <string name="login_error_message">No username provided, you are not logged in.</string>
+    <string name="login_empty_username_error_message">The username field can\'t be empty.</string>
+    <string name="login_invalid_email_error_message">Please provide a valid email address.</string>
+    <string name="login_empty_email_error_message">The email field can\'t be empty.</string>
+    <string name="login_empty_password_error_message">The password field can\'t be empty.</string>
 </resources>

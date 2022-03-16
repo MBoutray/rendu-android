@@ -35,11 +35,7 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (username != null) {
-            view.findViewById<TextView>(R.id.login_message).text = getString(R.string.login_message, username)
-        } else {
-            view.findViewById<TextView>(R.id.login_message).text = getString(R.string.login_error_message)
-        }
+        view.findViewById<TextView>(R.id.login_message).text = getString(R.string.login_message, username)
     }
 
     companion object {
