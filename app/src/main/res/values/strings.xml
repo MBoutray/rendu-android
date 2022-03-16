@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Rendu Kotlin Martin de Boutray</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username_hint">Username</string>
+    <string name="login">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="login_message">Welcome %s, you are logged in!</string>
+    <string name="login_error_message">No username provided, you are not logged in.</string>
 </resources>
