@@ -46,8 +46,12 @@ class LoginFormFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.login_empty_password_error_message), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+            if (!password.matches(Regex("^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@\$%^&*-]).{8,}\$"))) {
+                Toast.makeText(context, getString(R.string.login_password_not_conform_error_message), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             if (!agreement) {
-                Toast.makeText(context, getString(R.string.login_agreement_not_checked), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.login_agreement_not_checked_error_message), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 

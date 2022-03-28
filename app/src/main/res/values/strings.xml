@@ -11,6 +11,7 @@
     <string name="login_invalid_email_error_message">Please provide a valid email address.</string>
     <string name="login_empty_email_error_message">The email field can\'t be empty.</string>
     <string name="login_empty_password_error_message">The password field can\'t be empty.</string>
-    <string name="login_agreement_not_checked">The agreement checkbox must be checked.</string>
+    <string name="login_agreement_not_checked_error_message">The agreement checkbox must be checked.</string>
     <string name="check_user_agreement">Accept the end-user licence agreement</string>
+    <string name="login_password_not_conform_error_message"><![CDATA[The password must be at least 8 characters long, with at least one letter, one number and one special character (#?!@$%^&*-).]]></string>
 </resources>
