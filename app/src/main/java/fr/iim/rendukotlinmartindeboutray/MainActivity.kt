@@ -9,10 +9,10 @@ class MainActivity : AppCompatActivity(), LoginFormFragment.LoginListener {
         setContentView(R.layout.activity_main)
     }
 
-    override fun onLogin(username: String) {
+    override fun onLogin(email: String) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.login_form_fragment, WelcomeFragment.newInstance(username))
+            .replace(R.id.login_form_fragment, WelcomeFragment.newInstance(email))
             .commitNow()
     }
 

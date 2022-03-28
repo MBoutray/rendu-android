@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-private const val ARG_USERNAME = "username"
+private const val ARG_EMAIL = "email"
 
 /**
  * A simple [Fragment] subclass.
@@ -15,12 +15,12 @@ private const val ARG_USERNAME = "username"
  * create an instance of this fragment.
  */
 class WelcomeFragment : Fragment() {
-    private var username: String? = null
+    private var email: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            username = it.getString(ARG_USERNAME)
+            email = it.getString(ARG_EMAIL)
         }
     }
 
@@ -35,15 +35,15 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.login_message).text = getString(R.string.login_message, username)
+        view.findViewById<TextView>(R.id.login_message).text = getString(R.string.login_message, email)
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(username: String) =
+        fun newInstance(email: String) =
             WelcomeFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_USERNAME, username)
+                    putString(ARG_EMAIL, email)
                 }
             }
     }

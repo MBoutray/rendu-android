@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import java.lang.RuntimeException
 
 /**
@@ -32,15 +29,11 @@ class LoginFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.btn_login).setOnClickListener {
-            val username = view.findViewById<EditText>(R.id.login_username).text.toString()
             val email = view.findViewById<EditText>(R.id.login_email).text.toString()
             val password = view.findViewById<EditText>(R.id.login_password).text.toString()
+            val agreement = view.findViewById<CheckBox>(R.id.login_agreement).isChecked
 
             // Guard clauses to verify the content of the inputs
-            if (username.isEmpty()) {
-                Toast.makeText(context, getString(R.string.login_empty_username_error_message), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
             if (email.isEmpty()) {
                 Toast.makeText(context, getString(R.string.login_empty_email_error_message), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -53,9 +46,13 @@ class LoginFormFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.login_empty_password_error_message), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+            if (!agreement) {
+                Toast.makeText(context, getString(R.string.login_agreement_not_checked), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             // Login the user if all the values are valid
-            listener.onLogin(username)
+            listener.onLogin(email)
         }
     }
 
@@ -75,6 +72,6 @@ class LoginFormFragment : Fragment() {
     }
 
     interface LoginListener {
-        fun onLogin(username: String)
+        fun onLogin(email: String)
     }
 }

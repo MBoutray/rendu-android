@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginFormFragment"
     android:orientation="vertical">
-    <EditText
-        android:id="@+id/login_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/username_hint"
-        android:ems="10"
-        android:inputType="text"
-        />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="8dp" />
 
     <EditText
         android:id="@+id/login_email"
@@ -39,6 +27,16 @@
         android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:minHeight="48dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <CheckBox
+        android:id="@+id/login_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/check_user_agreement" />
 
     <Space
         android:layout_width="match_parent"
