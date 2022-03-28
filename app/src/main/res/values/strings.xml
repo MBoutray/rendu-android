@@ -14,4 +14,7 @@
     <string name="login_agreement_not_checked_error_message">The agreement checkbox must be checked.</string>
     <string name="check_user_agreement">Accept the end-user licence agreement</string>
     <string name="login_password_not_conform_error_message"><![CDATA[The password must be at least 8 characters long, with at least one letter, one number and one special character (#?!@$%^&*-).]]></string>
+    <string name="location_hint">Location</string>
+    <string name="location_text">Locate</string>
+    <string name="location_activity_text">You showed %s</string>
 </resources>
