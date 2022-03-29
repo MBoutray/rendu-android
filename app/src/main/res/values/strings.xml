@@ -17,4 +17,5 @@
     <string name="location_hint">Location</string>
     <string name="location_text">Locate</string>
     <string name="location_activity_text">You showed %s</string>
+    <string name="title_activity_test_maps">TestMapsActivity</string>
 </resources>
