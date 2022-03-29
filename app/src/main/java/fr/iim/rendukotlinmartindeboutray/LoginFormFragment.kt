@@ -2,6 +2,9 @@ package fr.iim.rendukotlinmartindeboutray
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +18,12 @@ import java.lang.RuntimeException
  * Use the [LoginFormFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LoginFormFragment : Fragment() {
+class LoginFormFragment : Fragment(), TextWatcher, CompoundButton.OnCheckedChangeListener, TextView.OnEditorActionListener {
     private lateinit var listener: LoginListener
+    private lateinit var emailInput: EditText
+    private lateinit var passwordInput: EditText
+    private lateinit var agreementInput: CheckBox
+    private lateinit var submitButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,46 +36,12 @@ class LoginFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Create submit button action
-        val button = view.findViewById<Button>(R.id.btn_login)
-        view.findViewById<EditText>(R.id.login_password).setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                button.performClick()
-                true
-            } else {
-                false
-            }
-        }
+        // Initialize the ui
+        initialize()
+        submitButton.isEnabled = false
 
-        view.findViewById<Button>(R.id.btn_login).setOnClickListener {
-            val email = view.findViewById<EditText>(R.id.login_email).text.toString()
-            val password = view.findViewById<EditText>(R.id.login_password).text.toString()
-            val agreement = view.findViewById<CheckBox>(R.id.login_agreement).isChecked
-
-            // Guard clauses to verify the content of the inputs
-            if (email.isEmpty()) {
-                Toast.makeText(context, getString(R.string.login_empty_email_error_message), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if (!email.matches(Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))) {
-                Toast.makeText(context, getString(R.string.login_invalid_email_error_message), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if (password.isEmpty()) {
-                Toast.makeText(context, getString(R.string.login_empty_password_error_message), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if (!password.matches(Regex("^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@\$%^&*-]).{8,}\$"))) {
-                Toast.makeText(context, getString(R.string.login_password_not_conform_error_message), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if (!agreement) {
-                Toast.makeText(context, getString(R.string.login_agreement_not_checked_error_message), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            // Login the user if all the values are valid
-            listener.onLogin(email)
+        submitButton.setOnClickListener {
+            listener.onLogin(emailInput.text.toString())
         }
     }
 
@@ -89,5 +62,86 @@ class LoginFormFragment : Fragment() {
 
     interface LoginListener {
         fun onLogin(email: String)
+    }
+
+    private fun initialize() {
+        // Initialize attributes
+        emailInput = requireView().findViewById<EditText>(R.id.login_email)
+        passwordInput = requireView().findViewById<EditText>(R.id.login_password)
+        agreementInput = requireView().findViewById<CheckBox>(R.id.login_agreement)
+        submitButton = requireView().findViewById<Button>(R.id.btn_login)
+
+        // Add text change listener
+        emailInput.addTextChangedListener(this)
+        passwordInput.addTextChangedListener(this)
+
+        // Add checkbox change listener
+        agreementInput.setOnCheckedChangeListener(this)
+
+        // Add keyboard submit listener
+        passwordInput.setOnEditorActionListener(this)
+    }
+
+    private fun isValidEmail(): Boolean {
+        val email = emailInput.text.toString()
+        if(email.isEmpty()) {
+            emailInput.error = getString(R.string.login_empty_email_error_message)
+            return false
+        }
+        if (!email.matches(Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))) {
+            emailInput.error = getString(R.string.login_invalid_email_error_message)
+            return false
+        }
+
+        return true
+    }
+
+    private fun isValidPassword(): Boolean {
+        val password = passwordInput.text.toString()
+
+        if(password.isEmpty()) {
+            passwordInput.error = getString(R.string.login_empty_password_error_message)
+            return false
+        }
+        if (!password.matches(Regex("(?=.*?[A-Za-z]).*"))) {
+            passwordInput.error = getString(R.string.login_password_must_contain_letters_error_message)
+            return false
+        }
+        if (!password.matches(Regex("(?=.*?[0-9]).*"))) {
+            passwordInput.error = getString(R.string.login_password_must_contain_a_number_error_message)
+            return false
+        }
+        if (!password.matches(Regex("(?=.*?[#?!@\$%^&*-]).*"))) {
+            passwordInput.error = getString(R.string.login_password_must_contain_a_symbol_error_message)
+            return false
+        }
+        if (!password.matches(Regex("^.{8,}\$"))) {
+            passwordInput.error = getString(R.string.login_password_must_be_at_least_8_char_long_error_message)
+            return false
+        }
+
+        return true
+    }
+
+    private fun onLoginValid() {
+        submitButton.isEnabled = isValidEmail() && isValidPassword() && agreementInput.isChecked
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun afterTextChanged(p0: Editable?) {
+        onLoginValid()
+    }
+
+    override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+        onLoginValid()
+    }
+
+    override fun onEditorAction(p0: TextView?, actionId: Int, p2: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            submitButton.performClick()
+            return true
+        }
+        return false
     }
 }

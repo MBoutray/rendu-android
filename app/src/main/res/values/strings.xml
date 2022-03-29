@@ -18,4 +18,8 @@
     <string name="location_text">Locate</string>
     <string name="location_activity_text">You showed %s</string>
     <string name="title_activity_test_maps">TestMapsActivity</string>
+    <string name="login_password_must_contain_letters_error_message">The password must contain letters.</string>
+    <string name="login_password_must_contain_a_number_error_message">The password must contain a number.</string>
+    <string name="login_password_must_contain_a_symbol_error_message">The password must contain a symbol</string>
+    <string name="login_password_must_be_at_least_8_char_long_error_message">The password must be at least 8 characters long.</string>
 </resources>
