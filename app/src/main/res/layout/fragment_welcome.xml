@@ -25,7 +25,8 @@
         android:ems="10"
         android:hint="@string/location_hint"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:imeOptions="actionDone"/>
 
     <Space
         android:layout_width="match_parent"

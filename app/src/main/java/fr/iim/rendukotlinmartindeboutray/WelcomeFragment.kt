@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -40,8 +41,20 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val button = view.findViewById<Button>(R.id.btn_location)
+
+        // Create submit button action
+        view.findViewById<EditText>(R.id.location_input).setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                button.performClick()
+                true
+            } else {
+                false
+            }
+        }
+
         view.findViewById<TextView>(R.id.login_message).text = getString(R.string.login_message, email)
-        view.findViewById<Button>(R.id.btn_location).setOnClickListener {
+        button.setOnClickListener {
             val location = view.findViewById<EditText>(R.id.location_input).text.toString()
 
             listener.onLocate(location)

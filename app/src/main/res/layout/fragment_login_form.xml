@@ -26,6 +26,7 @@
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
+        android:imeOptions="actionDone"
         android:minHeight="48dp" />
 
     <Space

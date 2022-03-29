@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import java.lang.RuntimeException
 
@@ -27,6 +28,17 @@ class LoginFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Create submit button action
+        val button = view.findViewById<Button>(R.id.btn_login)
+        view.findViewById<EditText>(R.id.login_password).setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                button.performClick()
+                true
+            } else {
+                false
+            }
+        }
 
         view.findViewById<Button>(R.id.btn_login).setOnClickListener {
             val email = view.findViewById<EditText>(R.id.login_email).text.toString()
