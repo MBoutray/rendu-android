@@ -1,23 +1,16 @@
 <resources>
     <string name="app_name">Rendu Kotlin Martin de Boutray</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="username_hint">Username</string>
     <string name="email_hint">Email</string>
     <string name="login">Login</string>
     <string name="password_hint">Password</string>
     <string name="login_message">Welcome %s!</string>
-    <string name="login_empty_username_error_message">The username field can\'t be empty.</string>
     <string name="login_invalid_email_error_message">Please provide a valid email address.</string>
     <string name="login_empty_email_error_message">The email field can\'t be empty.</string>
     <string name="login_empty_password_error_message">The password field can\'t be empty.</string>
     <string name="login_agreement_not_checked_error_message">The agreement checkbox must be checked.</string>
     <string name="check_user_agreement">Accept the end-user licence agreement</string>
-    <string name="login_password_not_conform_error_message"><![CDATA[The password must be at least 8 characters long, with at least one letter, one number and one special character (#?!@$%^&*-).]]></string>
     <string name="location_hint">Location</string>
     <string name="location_text">Locate</string>
-    <string name="location_activity_text">You showed %s</string>
-    <string name="title_activity_test_maps">TestMapsActivity</string>
     <string name="login_password_must_contain_letters_error_message">The password must contain letters.</string>
     <string name="login_password_must_contain_a_number_error_message">The password must contain a number.</string>
     <string name="login_password_must_contain_a_symbol_error_message">The password must contain a symbol</string>
